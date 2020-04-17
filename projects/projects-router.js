@@ -14,7 +14,12 @@ router.get('/', (req,res)=> {
 router.post('/', postValidation, (req,res)=> {
     const project = req.body;
     Projectsdb.makeProject(project)
-        .then(project => res.status(201).json(project))
+        .then(project => {
+            Projectsdb.findProjectById(project[0])
+            .then(project => res.status(201).json(project))
+            .then(err => res.status(500).json({message: err}))
+            
+        })
         .catch(err => res.status(500).json({message: err}))
 })
 
