@@ -11,7 +11,11 @@ router.get('/', (req,res)=> {
 router.post('/', resourceValidation, (req,res)=>{
     const resource = req.body;
     Resourcesdb.addResource(resource)
-    .then(resource => res.status(201).json(resource))
+    .then(resource => {
+        Resourcesdb.getResourceById(resource[0])
+        .then(resource => res.status(201).json(resource))
+        .catch(err => res.status(500).json({message: err}))
+    })
     .catch(err => res.status(500).json({message: err}))
 })
 

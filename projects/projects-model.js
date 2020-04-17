@@ -2,9 +2,7 @@ const db = require('../data/db-config.js');
 
 module.exports = {
     getProjects,
-    makeProject,
-    getListOfTasks,
-    addTask
+    makeProject
 }
 
 function getProjects(){
@@ -15,10 +13,4 @@ function makeProject(project){
     return db('projects')
     .insert(project)
 }
-function getListOfTasks(){
-    return db('taks')
-}
 
-function addTask(){
-    return null
-}
