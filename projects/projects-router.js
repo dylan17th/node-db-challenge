@@ -17,8 +17,7 @@ router.post('/', postValidation, (req,res)=> {
         .then(project => {
             Projectsdb.findProjectById(project[0])
             .then(project => res.status(201).json(project))
-            .then(err => res.status(500).json({message: err}))
-            
+            .catch(err => res.status(500).json({message: err})) 
         })
         .catch(err => res.status(500).json({message: err}))
 })
